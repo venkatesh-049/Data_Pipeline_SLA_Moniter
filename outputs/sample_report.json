@@ -1,0 +1,185 @@
+{
+  "alerts": [
+    {
+      "alert_code": "late_arrival",
+      "dataset_id": "inventory_hourly",
+      "message": "Load arrived after 2025-01-01T02:00:00Z.",
+      "severity": "medium"
+    },
+    {
+      "alert_code": "completion_sla_breached",
+      "dataset_id": "inventory_hourly",
+      "message": "Load completed after its 30-minute SLA.",
+      "severity": "high"
+    },
+    {
+      "alert_code": "stale_data",
+      "dataset_id": "inventory_hourly",
+      "message": "Data freshness is 130.0 minutes; the limit is 60 minutes.",
+      "severity": "medium"
+    },
+    {
+      "alert_code": "late_arrival",
+      "dataset_id": "payments_daily",
+      "message": "Load arrived after 2025-01-01T02:00:00Z.",
+      "severity": "medium"
+    },
+    {
+      "alert_code": "completion_sla_breached",
+      "dataset_id": "payments_daily",
+      "message": "Load completed after its 30-minute SLA.",
+      "severity": "high"
+    },
+    {
+      "alert_code": "stale_data",
+      "dataset_id": "payments_daily",
+      "message": "Data freshness is 135.0 minutes; the limit is 120 minutes.",
+      "severity": "medium"
+    },
+    {
+      "alert_code": "missing_load",
+      "dataset_id": "customers_daily",
+      "message": "No valid load was received for Daily customers.",
+      "severity": "critical"
+    },
+    {
+      "alert_code": "invalid_load",
+      "dataset_id": "events_hourly",
+      "message": "Load records for Hourly events were rejected.",
+      "severity": "high"
+    },
+    {
+      "alert_code": "rejected_record",
+      "dataset_id": "events_hourly",
+      "message": "Rejected events_20250101.csv line 5: row_count must be non-negative",
+      "severity": "medium"
+    },
+    {
+      "alert_code": "rejected_record",
+      "dataset_id": "ghost_dataset",
+      "message": "Rejected unknown.csv line 6: dataset_id is not present in the dataset schedule",
+      "severity": "high"
+    },
+    {
+      "alert_code": "rejected_record",
+      "dataset_id": "sales_daily",
+      "message": "Rejected sales_duplicate.csv line 7: duplicate (dataset_id, load_id)",
+      "severity": "medium"
+    },
+    {
+      "alert_code": "rejected_record",
+      "dataset_id": "sales_daily",
+      "message": "Rejected malformed.csv line 8: arrived_at must be an ISO-8601 timestamp",
+      "severity": "medium"
+    }
+  ],
+  "rejects": [
+    {
+      "dataset_id": "events_hourly",
+      "raw_record": "{\"arrived_at\": \"2025-01-01T02:00:00Z\", \"completed_at\": \"2025-01-01T02:15:00Z\", \"dataset_id\": \"events_hourly\", \"load_id\": \"events-20250101\", \"row_count\": \"-1\", \"source_file\": \"events_20250101.csv\"}",
+      "reason": "row_count must be non-negative",
+      "reason_code": "invalid_load",
+      "source_file": "events_20250101.csv",
+      "source_line": 5
+    },
+    {
+      "dataset_id": "ghost_dataset",
+      "raw_record": "{\"arrived_at\": \"2025-01-01T02:00:00Z\", \"completed_at\": \"2025-01-01T02:10:00Z\", \"dataset_id\": \"ghost_dataset\", \"load_id\": \"unknown-1\", \"row_count\": \"10\", \"source_file\": \"unknown.csv\"}",
+      "reason": "dataset_id is not present in the dataset schedule",
+      "reason_code": "unknown_dataset",
+      "source_file": "unknown.csv",
+      "source_line": 6
+    },
+    {
+      "dataset_id": "sales_daily",
+      "raw_record": "{\"arrived_at\": \"2025-01-01T01:55:00Z\", \"completed_at\": \"2025-01-01T02:25:00Z\", \"dataset_id\": \"sales_daily\", \"load_id\": \"sales-20250101\", \"row_count\": \"1200\", \"source_file\": \"sales_duplicate.csv\"}",
+      "reason": "duplicate (dataset_id, load_id)",
+      "reason_code": "duplicate_load",
+      "source_file": "sales_duplicate.csv",
+      "source_line": 7
+    },
+    {
+      "dataset_id": "sales_daily",
+      "raw_record": "{\"arrived_at\": \"not-a-timestamp\", \"completed_at\": \"2025-01-01T02:00:00Z\", \"dataset_id\": \"sales_daily\", \"load_id\": \"malformed-1\", \"row_count\": \"5\", \"source_file\": \"malformed.csv\"}",
+      "reason": "arrived_at must be an ISO-8601 timestamp",
+      "reason_code": "invalid_load",
+      "source_file": "malformed.csv",
+      "source_line": 8
+    }
+  ],
+  "results": [
+    {
+      "arrival_status": "missing",
+      "arrived_at": null,
+      "completed_at": null,
+      "completion_status": "not_applicable",
+      "dataset_id": "customers_daily",
+      "dataset_name": "Daily customers",
+      "expected_arrival_at": "2025-01-01T02:00:00Z",
+      "freshness_minutes": null,
+      "freshness_status": "not_applicable",
+      "row_count": null
+    },
+    {
+      "arrival_status": "invalid",
+      "arrived_at": null,
+      "completed_at": null,
+      "completion_status": "not_applicable",
+      "dataset_id": "events_hourly",
+      "dataset_name": "Hourly events",
+      "expected_arrival_at": "2025-01-01T02:00:00Z",
+      "freshness_minutes": null,
+      "freshness_status": "not_applicable",
+      "row_count": null
+    },
+    {
+      "arrival_status": "late",
+      "arrived_at": "2025-01-01T02:10:00Z",
+      "completed_at": "2025-01-01T02:50:00Z",
+      "completion_status": "breached",
+      "dataset_id": "inventory_hourly",
+      "dataset_name": "Hourly inventory",
+      "expected_arrival_at": "2025-01-01T02:00:00Z",
+      "freshness_minutes": 130.0,
+      "freshness_status": "stale",
+      "row_count": 540
+    },
+    {
+      "arrival_status": "late",
+      "arrived_at": "2025-01-01T02:05:00Z",
+      "completed_at": "2025-01-01T02:45:00Z",
+      "completion_status": "breached",
+      "dataset_id": "payments_daily",
+      "dataset_name": "Daily payments",
+      "expected_arrival_at": "2025-01-01T02:00:00Z",
+      "freshness_minutes": 135.0,
+      "freshness_status": "stale",
+      "row_count": 802
+    },
+    {
+      "arrival_status": "on_time",
+      "arrived_at": "2025-01-01T01:55:00Z",
+      "completed_at": "2025-01-01T02:25:00Z",
+      "completion_status": "within_sla",
+      "dataset_id": "sales_daily",
+      "dataset_name": "Daily sales",
+      "expected_arrival_at": "2025-01-01T02:00:00Z",
+      "freshness_minutes": 155.0,
+      "freshness_status": "fresh",
+      "row_count": 1200
+    }
+  ],
+  "run": {
+    "as_of": "2025-01-01T05:00:00Z",
+    "ended_at": "2026-11-10T07:09:09Z",
+    "expected_count": 5,
+    "failure_reason": "no failure",
+    "input_rows": 12,
+    "loaded_count": 3,
+    "output_count": 5,
+    "rejected_count": 4,
+    "run_id": "6e1ff1cbb321a422adf8a61a",
+    "started_at": "2026-11-10T07:09:09Z",
+    "status": "succeeded"
+  }
+}

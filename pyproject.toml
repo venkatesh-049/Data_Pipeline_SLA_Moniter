@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "local-data-pipeline-sla-monitor"
+version = "1.0.0"
+description = "A local data delivery SLA monitor using SQLite and SQLAlchemy"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "pandas==3.0.3",
+    "numpy==2.4.6",
+    "sqlalchemy==2.0.51",
+    "streamlit==1.58.0",
+    "pytest==9.0.3",
+    "python-dotenv==1.2.1",
+]
+
+[project.scripts]
+sla-monitor = "sla_monitor.cli:main"
+
+[tool.setuptools]
+packages = ["sla_monitor"]

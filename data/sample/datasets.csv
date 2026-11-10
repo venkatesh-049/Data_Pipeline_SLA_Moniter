@@ -1,0 +1,6 @@
+dataset_id,dataset_name,expected_arrival_at,completion_sla_minutes,freshness_sla_minutes
+sales_daily,Daily sales,2025-01-01T02:00:00Z,60,180
+inventory_hourly,Hourly inventory,2025-01-01T02:00:00Z,30,60
+payments_daily,Daily payments,2025-01-01T02:00:00Z,30,120
+customers_daily,Daily customers,2025-01-01T02:00:00Z,60,180
+events_hourly,Hourly events,2025-01-01T02:00:00Z,60,180
